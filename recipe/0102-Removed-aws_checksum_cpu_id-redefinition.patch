@@ -1,0 +1,26 @@
+From e96d6ff8c50baca348bbbc8ab643f077c3ba7e29 Mon Sep 17 00:00:00 2001
+From: Nishidha Panpaliya <npanpa23@in.ibm.com>
+Date: Tue, 19 Oct 2021 01:50:21 -0400
+Subject: [PATCH] Removed aws_checksum_cpu_id redefinition
+
+---
+ third_party/aws-checksums.BUILD | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/third_party/aws-checksums.BUILD b/third_party/aws-checksums.BUILD
+index 3383f22..22e068a 100644
+--- a/third_party/aws-checksums.BUILD
++++ b/third_party/aws-checksums.BUILD
+@@ -31,9 +31,6 @@ genrule(
+         "cat <<'EOF' >$@",
+         "#include <aws/checksums/private/cpuid.h>",
+         "#include <aws/checksums/private/crc_priv.h>",
+-        "int aws_checksums_do_cpu_id(int32_t *cpuid) {",
+-        "    return 0;",
+-        "}",
+         "uint32_t aws_checksums_crc32c_hw(const uint8_t *input, int length, uint32_t previousCrc32) {",
+         "  return aws_checksums_crc32c_sw(input, length, previousCrc32);",
+         "}",
+-- 
+2.23.0
+
