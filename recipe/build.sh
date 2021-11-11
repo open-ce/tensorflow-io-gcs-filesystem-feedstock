@@ -25,21 +25,12 @@ SCRIPT_DIR=$RECIPE_DIR/../buildscripts
 
 # Pick up additional variables defined from the conda build environment
 $SCRIPT_DIR/set_python_path_for_bazelrc.sh $SRC_DIR
-#if [[ $build_type == "cuda" ]]
-#then
-  # Pick up the CUDA and CUDNN environment
-#  $SCRIPT_DIR/set_tensorflow_nvidia_bazelrc.sh $SRC_DIR/tensorflow $PY_VER
-#fi
-
-# Build the bazelrc
-#$SCRIPT_DIR/set_tensorflow_bazelrc.sh $SRC_DIR/tensorflow
 
 sh ${SRC_DIR}/configure.sh
-#BAZEL_OPTIMIZATION="--experimental_repo_remote_exec"
 
 # install using pip from the whl file
-#bazel --bazelrc=$SRC_DIR/python_configure.bazelrc build -s \
-bazel build -s --verbose_failures $BAZEL_OPTIMIZATION //tensorflow_io_gcs_filesystem/...
+bazel --bazelrc=$SRC_DIR/python_configure.bazelrc build \
+      --verbose_failures $BAZEL_OPTIMIZATION //tensorflow_io_gcs_filesystem/...
 
 python setup.py bdist_wheel --data bazel-bin --project tensorflow-io-gcs-filesystem
 python -m pip install dist/*.whl
