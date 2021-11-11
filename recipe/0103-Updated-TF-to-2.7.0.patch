@@ -17,11 +17,11 @@ index 6297d1e..05f4095 100644
      name = "org_tensorflow",
 -    sha256 = "41b32eeaddcbc02b0583660bcf508469550e4cd0f86b22d2abe72dfebeacde0f",
 -    strip_prefix = "tensorflow-2.6.0",
-+    sha256 = "3338516259ae485c32b19a2011399aeea612787ed460ed61eb3ffb1d577be393",
-+    strip_prefix = "tensorflow-2.7.0-rc1",
++    sha256 = "bb124905c7fdacd81e7c842b287c169bbf377d29c74c9dacc04f96c9793747bb",
++    strip_prefix = "tensorflow-2.7.0",
      urls = [
 -        "https://github.com/tensorflow/tensorflow/archive/refs/tags/v2.6.0.tar.gz",
-+        "https://github.com/tensorflow/tensorflow/archive/refs/tags/v2.7.0-rc1.tar.gz",
++        "https://github.com/tensorflow/tensorflow/archive/refs/tags/v2.7.0.tar.gz",
      ],
  )
  
