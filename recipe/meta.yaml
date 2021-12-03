@@ -1,0 +1,50 @@
+{% set build_version = "0.21.0" %}
+
+package:
+  name: tensorflow-io-gcs-filesystem
+  version: {{ build_version }}
+
+source:
+  git_url: https://github.com/tensorflow/io.git
+  git_rev: v{{ build_version }}
+  patches:
+    # 01xx - patch is specific to open-ce and will always be carried forward and not upstreamed
+    - 0101-Build-fixed-on-ppc.patch            #[ppc64le]
+    - 0102-Removed-aws_checksum_cpu_id-redefinition.patch
+    - 0103-Updated-TF-to-2.7.0.patch
+    - 0104-Fix-another-error-with-headers-not-found.patch
+
+build:
+  number: 1
+  string: h{{ PKG_HASH }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
+    - git >=2.2
+    - bazel {{ bazel }}
+    - setuptools {{ setuptools }}
+    - python {{ python }}
+    - numpy {{ numpy }}
+    - tensorflow-base {{ tensorflow }}
+  run:
+    - python {{ python }}
+    - numpy {{ numpy }}
+
+about:
+  home: http://tensorflow.org/
+  license: Apache 2.0
+  license_family: Apache
+  license_file: {{ SRC_DIR }}/LICENSE
+  summary: Dataset, streaming, and file system extensions
+  description: |
+    TensorFlow I/O is a collection of file systems and file formats that are
+    not available in TensorFlow's built-in support.
+  dev_url: https://github.com/tensorflow/io
+  doc_url: https://github.com/tensorflow/io/tree/v{{ build_version }}/docs
+
+extra:
+  recipe-maintainers:
+    - open-ce/open-ce-dev-team

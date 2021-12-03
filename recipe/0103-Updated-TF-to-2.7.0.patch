@@ -1,0 +1,30 @@
+From 1877917e0112876f46b629593cb8f2bdaee08230 Mon Sep 17 00:00:00 2001
+From: Nishidha Panpaliya <npanpa23@in.ibm.com>
+Date: Wed, 27 Oct 2021 05:21:51 -0400
+Subject: [PATCH] Updated TF to 2.7.0-rc1
+
+---
+ WORKSPACE | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/WORKSPACE b/WORKSPACE
+index 6297d1e..05f4095 100644
+--- a/WORKSPACE
++++ b/WORKSPACE
+@@ -153,10 +153,10 @@ pip_install()
+ 
+ http_archive(
+     name = "org_tensorflow",
+-    sha256 = "41b32eeaddcbc02b0583660bcf508469550e4cd0f86b22d2abe72dfebeacde0f",
+-    strip_prefix = "tensorflow-2.6.0",
++    sha256 = "bb124905c7fdacd81e7c842b287c169bbf377d29c74c9dacc04f96c9793747bb",
++    strip_prefix = "tensorflow-2.7.0",
+     urls = [
+-        "https://github.com/tensorflow/tensorflow/archive/refs/tags/v2.6.0.tar.gz",
++        "https://github.com/tensorflow/tensorflow/archive/refs/tags/v2.7.0.tar.gz",
+     ],
+ )
+ 
+-- 
+2.23.0
+

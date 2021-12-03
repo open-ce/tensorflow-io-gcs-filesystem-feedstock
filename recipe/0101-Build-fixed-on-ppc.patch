@@ -1,0 +1,24 @@
+From 4d5b79c29a484626ce7b8a5795709276bb9dbcf9 Mon Sep 17 00:00:00 2001
+From: Nishidha Panpaliya <npanpa23@in.ibm.com>
+Date: Wed, 6 Oct 2021 08:49:36 -0500
+Subject: [PATCH] Build fixed on ppc
+
+---
+ third_party/arrow.BUILD | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/third_party/arrow.BUILD b/third_party/arrow.BUILD
+index 6db8f4a..99da8d2 100644
+--- a/third_party/arrow.BUILD
++++ b/third_party/arrow.BUILD
+@@ -104,6 +104,7 @@ cc_library(
+         "PARQUET_STATIC",
+         "PARQUET_EXPORT=",
+         "WIN32_LEAN_AND_MEAN",
++        "ARROW_ALTIVEC",
+     ],
+     includes = [
+         "cpp/src",
+-- 
+2.23.0
+
