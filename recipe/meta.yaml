@@ -1,4 +1,4 @@
-{% set build_version = "0.21.0" %}
+{% set build_version = "0.23.1" %}
 
 package:
   name: tensorflow-io-gcs-filesystem
@@ -44,6 +44,12 @@ about:
     not available in TensorFlow's built-in support.
   dev_url: https://github.com/tensorflow/io
   doc_url: https://github.com/tensorflow/io/tree/v{{ build_version }}/docs
+
+test:
+  requires:
+    - tensorflow-base {{ tensorflow }}
+  commands:
+    - export TF_USE_MODULAR_FILESYSTEM=1; python -c "import tensorflow_io_gcs_filesystem as tfio;"
 
 extra:
   recipe-maintainers:
