@@ -1,4 +1,4 @@
-{% set build_version = "0.23.1" %}
+{% set build_version = "0.24.0" %}
 
 package:
   name: tensorflow-io-gcs-filesystem
@@ -11,11 +11,10 @@ source:
     # 01xx - patch is specific to open-ce and will always be carried forward and not upstreamed
     - 0101-Build-fixed-on-ppc.patch            #[ppc64le]
     - 0102-Removed-aws_checksum_cpu_id-redefinition.patch
-    - 0103-Updated-TF-to-2.7.0.patch
     - 0104-Fix-another-error-with-headers-not-found.patch
 
 build:
-  number: 2
+  number: 1
   string: h{{ PKG_HASH }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
 
 requirements:
