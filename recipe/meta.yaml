@@ -1,4 +1,4 @@
-{% set build_version = "0.25.0" %}
+{% set build_version = "0.26.0" %}
 
 package:
   name: tensorflow-io-gcs-filesystem
@@ -12,6 +12,7 @@ source:
     - 0101-Build-fixed-on-ppc.patch            #[ppc64le]
     - 0102-Removed-aws_checksum_cpu_id-redefinition.patch
     - 0104-Fix-another-error-with-headers-not-found.patch
+    - 0105-Boringssl-fixed-for-GCC-11.patch
 
 build:
   number: 1

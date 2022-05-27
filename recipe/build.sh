@@ -43,9 +43,17 @@ $SCRIPT_DIR/set_python_path_for_bazelrc.sh $SRC_DIR
 sh ${SRC_DIR}/configure.sh
 
 # install using pip from the whl file
-bazel --bazelrc=$SRC_DIR/python_configure.bazelrc build \
+bazel --bazelrc=$SRC_DIR/python_configure.bazelrc build -s \
       --verbose_failures $BAZEL_OPTIMIZATION //tensorflow_io_gcs_filesystem/...
 
+if [ $? -eq 0 ];
+then
+    echo "bazel build executed successfully"
+else
+    echo "bazel build terminated unsuccessfully"
+    bazel clean --expunge
+    bazel shutdown
+fi
 python setup.py bdist_wheel --data bazel-bin --project tensorflow-io-gcs-filesystem
 python -m pip install dist/*.whl
 
