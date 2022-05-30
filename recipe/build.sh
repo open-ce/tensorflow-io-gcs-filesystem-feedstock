@@ -16,20 +16,6 @@
 # *****************************************************************
 set -vex
 
-PATH_VAR="$PATH"
-if [[ $ppc_arch == "p10" ]]
-then
-    if [[ -z "${GCC_10_HOME}" ]];
-    then
-        echo "Please set GCC_10_HOME to the install path of gcc-toolset-10"
-        exit 1
-    else
-        export PATH=${GCC_10_HOME}/bin/:$PATH
-    fi
-    GCC_USED=`which gcc`
-    echo "GCC being used is ${GCC_USED}"
-fi
-
 #Clean up old bazel cache to avoid problems building TF
 bazel clean --expunge
 bazel shutdown
@@ -43,7 +29,7 @@ $SCRIPT_DIR/set_python_path_for_bazelrc.sh $SRC_DIR
 sh ${SRC_DIR}/configure.sh
 
 # install using pip from the whl file
-bazel --bazelrc=$SRC_DIR/python_configure.bazelrc build -s \
+bazel --bazelrc=$SRC_DIR/python_configure.bazelrc build \
       --verbose_failures $BAZEL_OPTIMIZATION //tensorflow_io_gcs_filesystem/...
 
 if [ $? -eq 0 ];
@@ -60,5 +46,3 @@ python -m pip install dist/*.whl
 bazel clean --expunge
 bazel shutdown
 
-#Restore $PATH variable
-export PATH=$PATH_VAR
