@@ -15,13 +15,13 @@ source:
     - 0105-Boringssl-fixed-for-GCC-11.patch    #[c_compiler_version == "11.2.*"]
 
 build:
-  number: 1
+  number: 2
   string: h{{ PKG_HASH }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    - {{ compiler('c') }}      # [ ppc_arch != "p10"]
+    - {{ compiler('cxx') }}    # [ ppc_arch != "p10"]
   host:
     - git >=2.2
     - bazel {{ bazel }}
