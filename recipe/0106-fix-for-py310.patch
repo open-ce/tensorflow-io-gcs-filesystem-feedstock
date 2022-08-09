@@ -1,3 +1,12 @@
+From 705fe825a7ea61972fc0efe9c5dd694be54c0cf2 Mon Sep 17 00:00:00 2001
+From: Deepali Chourasia <deepch23@in.ibm.com>
+Date: Tue, 9 Aug 2022 10:18:40 +0000
+Subject: [PATCH] updates rules_python for py310 support
+
+---
+ WORKSPACE | 14 +++++---------
+ 1 file changed, 5 insertions(+), 9 deletions(-)
+
 diff --git a/WORKSPACE b/WORKSPACE
 index 5eb4e72d..7c381f9c 100644
 --- a/WORKSPACE
@@ -15,16 +24,16 @@ index 5eb4e72d..7c381f9c 100644
 +        "https://github.com/bazelbuild/rules_python/releases/download/0.4.0/rules_python-0.4.0.tar.gz",
      ],
  )
-
+ 
 -load("@rules_python//python:pip.bzl", "pip_import")
 +load("@rules_python//python:pip.bzl", "pip_install")
-
+ 
 -pip_import(
 +pip_install(
      name = "lint_dependencies",
      requirements = "//tools/lint:requirements.txt",
  )
-
+ 
 -load("@lint_dependencies//:requirements.bzl", "pip_install")
 -
 -pip_install()
@@ -32,3 +41,6 @@ index 5eb4e72d..7c381f9c 100644
  http_archive(
      name = "org_tensorflow",
      sha256 = "8087cb0c529f04a4bfe480e49925cd64a904ad16d8ec66b98e2aacdfd53c80ff",
+-- 
+2.34.1
+
