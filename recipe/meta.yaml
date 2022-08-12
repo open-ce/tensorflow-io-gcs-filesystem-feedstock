@@ -13,9 +13,10 @@ source:
     - 0102-Removed-aws_checksum_cpu_id-redefinition.patch
     - 0104-Fix-another-error-with-headers-not-found.patch
     - 0105-Boringssl-fixed-for-GCC-11.patch    #[c_compiler_version == "11.2.*"]
+    - 0106-fix-for-py310.patch
 
 build:
-  number: 2
+  number: 3
   string: h{{ PKG_HASH }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
 
 requirements:
