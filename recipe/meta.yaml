@@ -1,7 +1,7 @@
 {% set build_version = "0.27.0" %}
 
 package:
-  name: tensorflow-io-gcs-filesystem
+  name: tensorflow-io
   version: {{ build_version }}
 
 source:
@@ -15,24 +15,58 @@ source:
     - 0105-Boringssl-fixed-for-GCC-11.patch    #[c_compiler_version == "11.2.*"]
     - 0106-fix-for-py310.patch
 
+    - 0301-Updated-protobuf-to-3.19.patch
+    - 0302-Fix-libwebp-linking-errors.patch
+
 build:
   number: 1
   string: h{{ PKG_HASH }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
 
-requirements:
-  build:
-    - {{ compiler('c') }}      # [ ppc_arch != "p10"]
-    - {{ compiler('cxx') }}    # [ ppc_arch != "p10"]
-  host:
-    - git >=2.2
-    - bazel {{ bazel }}
-    - setuptools {{ setuptools }}
-    - python {{ python }}
-    - numpy {{ numpy }}
+outputs:
+  - name: tensorflow-io
+    script: build-tf-io.sh
+    requirements:
+      build:
+        - {{ compiler('c') }}      # [ ppc_arch != "p10"]
+        - {{ compiler('cxx') }}    # [ ppc_arch != "p10"]
+      host:
+        - git >=2.2
+        - bazel {{ bazel }}
+        - setuptools {{ setuptools }}
+        - python {{ python }}
+        - numpy {{ numpy }}
+        - tensorflow-base {{ tensorflow }}
+      run:
+        - python {{ python }}
+        - numpy {{ numpy }}
+        - tensorflow-io-gcs-filesystem {{ tensorflow_io_gcs_filesystem }}
+
+  - name: tensorflow-io-gcs-filesystem
+    script: build-tf-io-gcs-filesystem.sh
+    requirements:
+      build:
+        - {{ compiler('c') }}      # [ ppc_arch != "p10"]
+        - {{ compiler('cxx') }}    # [ ppc_arch != "p10"]
+      host:
+        - git >=2.2
+        - bazel {{ bazel }}
+        - setuptools {{ setuptools }}
+        - python {{ python }}
+        - numpy {{ numpy }}
+        - tensorflow-base {{ tensorflow }}
+        - keras {{ keras }}
+        - tensorflow-estimator {{ tensorflow }}
+        - tensorboard {{ tensorboard }}
+      run:
+        - python {{ python }}
+        - numpy {{ numpy }}
+
+test:
+  requires:
     - tensorflow-base {{ tensorflow }}
-  run:
-    - python {{ python }}
-    - numpy {{ numpy }}
+  imports:
+    - tensorflow_io_gcs_filesystem
+    - tensorflow_io
 
 about:
   home: http://tensorflow.org/
