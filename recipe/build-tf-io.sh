@@ -1,6 +1,6 @@
 #!/bin/bash
 # *****************************************************************
-# (C) Copyright IBM Corp. 2021, 2022. All Rights Reserved.
+# (C) Copyright IBM Corp. 2022. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ sh ${SRC_DIR}/configure.sh
 
 # install using pip from the whl file
 bazel --bazelrc=$SRC_DIR/python_configure.bazelrc build \
-      --verbose_failures $BAZEL_OPTIMIZATION //tensorflow_io/...
+      --verbose_failures $BAZEL_OPTIMIZATION //tensorflow_io_gcs_filesystem/... //tensorflow_io/...
 
 if [ $? -eq 0 ];
 then

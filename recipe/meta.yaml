@@ -23,24 +23,6 @@ build:
   string: h{{ PKG_HASH }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
 
 outputs:
-  - name: tensorflow-io
-    script: build-tf-io.sh
-    requirements:
-      build:
-        - {{ compiler('c') }}      # [ ppc_arch != "p10"]
-        - {{ compiler('cxx') }}    # [ ppc_arch != "p10"]
-      host:
-        - git >=2.2
-        - bazel {{ bazel }}
-        - setuptools {{ setuptools }}
-        - python {{ python }}
-        - numpy {{ numpy }}
-        - tensorflow-base {{ tensorflow }}
-      run:
-        - python {{ python }}
-        - numpy {{ numpy }}
-        - tensorflow-io-gcs-filesystem {{ tensorflow_io_gcs_filesystem }}
-
   - name: tensorflow-io-gcs-filesystem
     script: build-tf-io-gcs-filesystem.sh
     requirements:
@@ -57,6 +39,23 @@ outputs:
         - keras {{ keras }}
         - tensorflow-estimator {{ tensorflow }}
         - tensorboard {{ tensorboard }}
+      run:
+        - python {{ python }}
+        - numpy {{ numpy }}
+
+  - name: tensorflow-io
+    script: build-tf-io.sh
+    requirements:
+      build:
+        - {{ compiler('c') }}      # [ ppc_arch != "p10"]
+        - {{ compiler('cxx') }}    # [ ppc_arch != "p10"]
+        - bazel {{ bazel }}
+      host:
+        - git >=2.2
+        - setuptools {{ setuptools }}
+        - python {{ python }}
+        - numpy {{ numpy }}
+        - tensorflow-base {{ tensorflow }}
       run:
         - python {{ python }}
         - numpy {{ numpy }}
