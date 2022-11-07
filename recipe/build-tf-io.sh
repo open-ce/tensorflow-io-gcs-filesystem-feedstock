@@ -30,7 +30,7 @@ sh ${SRC_DIR}/configure.sh
 
 # install using pip from the whl file
 bazel --bazelrc=$SRC_DIR/python_configure.bazelrc build \
-      --verbose_failures $BAZEL_OPTIMIZATION //tensorflow_io_gcs_filesystem/... //tensorflow_io/...
+      --verbose_failures $BAZEL_OPTIMIZATION //tensorflow_io/... //tensorflow_io_gcs_filesystem/...
 
 if [ $? -eq 0 ];
 then
@@ -40,7 +40,8 @@ else
     bazel clean --expunge
     bazel shutdown
 fi
-python setup.py bdist_wheel --data bazel-bin --project tensorflow-io-gcs-filesystem
+
+python setup.py bdist_wheel --data bazel-bin
 python -m pip install dist/*.whl
 
 bazel clean --expunge
