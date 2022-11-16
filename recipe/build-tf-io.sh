@@ -25,11 +25,14 @@ SCRIPT_DIR=$RECIPE_DIR/../buildscripts
 
 # Pick up additional variables defined from the conda build environment
 $SCRIPT_DIR/set_python_path_for_bazelrc.sh $SRC_DIR
+$SCRIPT_DIR/set_tf_io_bazelrc.sh $SRC_DIR $PY_VER
 
 sh ${SRC_DIR}/configure.sh
 
+export BAZEL_OPTIMIZATION="--config=optimization"
+
 # install using pip from the whl file
-bazel --bazelrc=$SRC_DIR/python_configure.bazelrc build \
+bazel --bazelrc=$SRC_DIR/tf_io.bazelrc build \
       --verbose_failures $BAZEL_OPTIMIZATION //tensorflow_io/... //tensorflow_io_gcs_filesystem/...
 
 if [ $? -eq 0 ];
@@ -42,6 +45,8 @@ else
 fi
 
 python setup.py bdist_wheel --data bazel-bin
+python setup.py bdist_wheel --data bazel-bin --project tensorflow-io-gcs-filesystem
+
 python -m pip install dist/*.whl
 
 bazel clean --expunge
