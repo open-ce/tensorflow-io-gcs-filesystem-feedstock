@@ -27,7 +27,12 @@ SCRIPT_DIR=$RECIPE_DIR/../buildscripts
 $SCRIPT_DIR/set_python_path_for_bazelrc.sh $SRC_DIR
 $SCRIPT_DIR/set_tf_io_bazelrc.sh $SRC_DIR $PY_VER
 
-sh ${SRC_DIR}/configure.sh
+#sh ${SRC_DIR}/configure.sh
+if [[ $build_type == "cuda" ]]
+then
+  # Pick up the CUDA and CUDNN environment
+  $SCRIPT_DIR/set_tf_io_nvidia_bazelrc.sh $SRC_DIR/ $PY_VER
+fi
 
 export BAZEL_OPTIMIZATION="--config=optimization"
 
