@@ -1,0 +1,24 @@
+From 6a039574bf80ba991dea2d45281beb2cb51d1014 Mon Sep 17 00:00:00 2001
+From: Nishidha Panpaliya <npanpa23@in.ibm.com>
+Date: Thu, 1 Dec 2022 03:34:21 -0500
+Subject: [PATCH] Add include path for rpc headers from  libtirpc-devel package
+
+---
+ tools/build/tensorflow_io.bzl | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/tools/build/tensorflow_io.bzl b/tools/build/tensorflow_io.bzl
+index 7c27c1a4..3ad650cd 100644
+--- a/tools/build/tensorflow_io.bzl
++++ b/tools/build/tensorflow_io.bzl
+@@ -23,6 +23,7 @@ def tf_io_copts():
+             "//conditions:default": [
+                 "-DNDEBUG",
+                 "-pthread",
++                "-I/usr/include/tirpc",
+             ],
+         })
+     )
+-- 
+2.23.0
+
