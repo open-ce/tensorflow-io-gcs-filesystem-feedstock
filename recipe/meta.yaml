@@ -1,7 +1,7 @@
-{% set build_version = "0.26.0" %}
+{% set build_version = "0.27.0" %}
 
 package:
-  name: tensorflow-io-gcs-filesystem
+  name: tensorflow-io
   version: {{ build_version }}
 
 source:
@@ -10,29 +10,73 @@ source:
   patches:
     # 01xx - patch is specific to open-ce and will always be carried forward and not upstreamed
     - 0101-Build-fixed-on-ppc.patch            #[ppc64le]
-    - 0102-Removed-aws_checksum_cpu_id-redefinition.patch
+    - 0102-Removed-aws_checksum_cpu_id-redefinition.patch #[ppc64le]
     - 0104-Fix-another-error-with-headers-not-found.patch
     - 0105-Boringssl-fixed-for-GCC-11.patch    #[c_compiler_version == "11.2.*"]
     - 0106-fix-for-py310.patch
+    - 0108-Fixed-upb.patch
+    - 0109-Add-include-path-for-rpc-headers-from-libtirpc-devel.patch   #[ppc_arch == 'p10']
+    - 0301-Updated-protobuf-to-3.19.patch
+    - 0302-Fix-libwebp-linking-errors.patch
 
 build:
-  number: 3
-  string: h{{ PKG_HASH }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
+  number: 1
+  string: {{ build_type }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}   #[build_type == 'cpu']
+  string: {{ build_type }}{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }} #[build_type == 'cuda']
 
-requirements:
-  build:
-    - {{ compiler('c') }}      # [ ppc_arch != "p10"]
-    - {{ compiler('cxx') }}    # [ ppc_arch != "p10"]
-  host:
-    - git >=2.2
-    - bazel {{ bazel }}
-    - setuptools {{ setuptools }}
-    - python {{ python }}
-    - numpy {{ numpy }}
-    - tensorflow-base {{ tensorflow }}
-  run:
-    - python {{ python }}
-    - numpy {{ numpy }}
+outputs:
+  - name: tensorflow-io-gcs-filesystem
+    script: build-tf-io-gcs-filesystem.sh
+    requirements:
+      build:
+        - {{ compiler('c') }}      # [ ppc_arch != "p10"]
+        - {{ compiler('cxx') }}    # [ ppc_arch != "p10"]
+      host:
+        - git >=2.2
+        - bazel {{ bazel }}
+        - setuptools {{ setuptools }}
+        - python {{ python }}
+        - numpy {{ numpy }}
+        - tensorflow-base {{ tensorflow }}
+        - keras {{ keras }}
+        - tensorflow-estimator {{ tensorflow }}
+        - tensorboard {{ tensorboard }}
+      run:
+        - python {{ python }}
+        - numpy {{ numpy }}
+        - tensorflow-base {{ tensorflow }}
+        - keras {{ keras }}
+        - tensorflow-estimator {{ tensorflow }}
+        - tensorboard {{ tensorboard }}
+
+  - name: tensorflow-io
+    script: build-tf-io.sh
+    requirements:
+      build:
+        - {{ compiler('c') }}      # [ ppc_arch != "p10"]
+        - {{ compiler('cxx') }}    # [ ppc_arch != "p10"]
+        - bazel {{ bazel }}
+      host:
+        - git >=2.2
+        - setuptools {{ setuptools }}
+        - python {{ python }}
+        - numpy {{ numpy }}
+        - tensorflow-base {{ tensorflow }}
+        - keras {{ keras }}
+        - tensorflow-estimator {{ tensorflow }}
+        - tensorboard {{ tensorboard }}
+      run:
+        - python {{ python }}
+        - numpy {{ numpy }}
+        - tensorflow-base {{ tensorflow }}
+        - keras {{ keras }}
+        - tensorflow-estimator {{ tensorflow }}
+        - tensorboard {{ tensorboard }}
+
+
+test:
+  commands:
+    - export TF_USE_MODULAR_FILESYSTEM=1; python -c "import tensorflow_io_gcs_filesystem as tfio; import tensorflow_io;"
 
 about:
   home: http://tensorflow.org/
@@ -45,12 +89,6 @@ about:
     not available in TensorFlow's built-in support.
   dev_url: https://github.com/tensorflow/io
   doc_url: https://github.com/tensorflow/io/tree/v{{ build_version }}/docs
-
-test:
-  requires:
-    - tensorflow-base {{ tensorflow }}
-  commands:
-    - export TF_USE_MODULAR_FILESYSTEM=1; python -c "import tensorflow_io_gcs_filesystem as tfio;"
 
 extra:
   recipe-maintainers:
