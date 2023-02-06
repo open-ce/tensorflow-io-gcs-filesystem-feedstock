@@ -1,6 +1,6 @@
 #!/bin/bash
 # *****************************************************************
-# (C) Copyright IBM Corp. 2022. All Rights Reserved.
+# (C) Copyright IBM Corp. 2022, 2023. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,9 +16,7 @@
 # *****************************************************************
 set -vex
 
-#Clean up old bazel cache to avoid problems building TF
-bazel clean --expunge
-bazel shutdown
+source open-ce-common-utils.sh
 
 # Build Tensorflow from source
 SCRIPT_DIR=$RECIPE_DIR/../buildscripts
@@ -45,8 +43,9 @@ then
     echo "bazel build executed successfully"
 else
     echo "bazel build terminated unsuccessfully"
-    bazel clean --expunge
-    bazel shutdown
+    PID=$(bazel info server_pid)
+    echo "PID: $PID"
+    cleanup_bazel $PID
 fi
 
 python setup.py bdist_wheel --data bazel-bin
@@ -54,6 +53,6 @@ python setup.py bdist_wheel --data bazel-bin --project tensorflow-io-gcs-filesys
 
 python -m pip install dist/*.whl
 
-bazel clean --expunge
-bazel shutdown
-
+PID=$(bazel info server_pid)
+echo "PID: $PID"
+cleanup_bazel $PID
