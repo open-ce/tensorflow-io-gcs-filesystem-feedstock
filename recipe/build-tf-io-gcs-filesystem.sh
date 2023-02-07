@@ -34,6 +34,10 @@ fi
 
 export BAZEL_OPTIMIZATION="--config=optimization"
 
+PID=$(bazel info server_pid)
+echo "PID: $PID"
+cleanup_bazel $PID
+
 # install using pip from the whl file
 bazel --bazelrc=$SRC_DIR/tf_io.bazelrc build \
       --verbose_failures $BAZEL_OPTIMIZATION //tensorflow_io_gcs_filesystem/...
