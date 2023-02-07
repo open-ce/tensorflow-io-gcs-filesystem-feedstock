@@ -40,7 +40,7 @@ cleanup_bazel $PID
 
 # install using pip from the whl file
 bazel --bazelrc=$SRC_DIR/tf_io.bazelrc build \
-      --verbose_failures $BAZEL_OPTIMIZATION //tensorflow_io_gcs_filesystem/...
+      $BAZEL_OPTIMIZATION //tensorflow_io_gcs_filesystem/...
 
 if [ $? -eq 0 ];
 then
