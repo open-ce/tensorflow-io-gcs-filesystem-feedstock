@@ -16,10 +16,9 @@
 # *****************************************************************
 set -vex
 
-#Clean up old bazel cache to avoid problems building TF
-bazel clean --expunge
-bazel shutdown
+source open-ce-common-utils.sh
 
+#Clean up old bazel cache to avoid problems building TF
 # Build Tensorflow from source
 SCRIPT_DIR=$RECIPE_DIR/../buildscripts
 
@@ -43,6 +42,8 @@ fi
 python setup.py bdist_wheel --data bazel-bin --project tensorflow-io-gcs-filesystem
 python -m pip install dist/*.whl
 
-bazel clean --expunge
-bazel shutdown
+
+PID=$(bazel info server_pid)
+echo "PID: $PID"
+cleanup_bazel $PID
 
