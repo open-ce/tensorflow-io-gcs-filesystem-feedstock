@@ -1,4 +1,4 @@
-{% set build_version = "0.27.0" %}
+{% set build_version = "0.32.0" %}
 
 package:
   name: tensorflow-io
@@ -16,7 +16,7 @@ source:
     - 0106-fix-for-py310.patch
     - 0108-Fixed-upb.patch
     - 0109-Add-include-path-for-rpc-headers-from-libtirpc-devel.patch   #[ppc_arch == 'p10']
-    - 0301-Updated-protobuf-to-3.19.patch
+    - 0301-Updated-protobuf-to-4.21.patch
     - 0302-Fix-libwebp-linking-errors.patch
 
 build:
