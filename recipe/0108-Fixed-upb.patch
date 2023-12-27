@@ -34,27 +34,41 @@ index c60b5d8f..d5641000 100644
      name = "snappy",
 diff --git a/third_party/upb_gcc10.patch b/third_party/upb_gcc10.patch
 new file mode 100644
-index 00000000..5b9e9ca3
+index 00000000..6fed76a0
 --- /dev/null
 +++ b/third_party/upb_gcc10.patch
-@@ -0,0 +1,54 @@
-+From cb5e73c339c0b2e5a88d32746b1b39a375a433e9 Mon Sep 17 00:00:00 2001
-+From: Archana Shinde1 <archana.shinde2504@gmail.com>
-+Date: Wed, 20 Dec 2023 16:35:10 +0000
-+Subject: [PATCH] Fix for build failure with GCC10
+@@ -0,0 +1,68 @@
++From bf999f71058f05330f8dce75d2113770e7c580ca Mon Sep 17 00:00:00 2001
++From: Deepali Chourasia <deepch23@in.ibm.com>
++Date: Wed, 27 Dec 2023 07:42:32 +0000
++Subject: [PATCH] fix
 +
 +---
++ BUILD     |  2 +-
 + upb/upb.c | 17 +++--------------
-+ 1 file changed, 3 insertions(+), 14 deletions(-)
++ 2 files changed, 4 insertions(+), 15 deletions(-)
 +
++diff --git a/BUILD b/BUILD
++index ad85b202..2311b2e4 100644
++--- a/BUILD
+++++ b/BUILD
++@@ -44,7 +44,7 @@ config_setting(
++
++ config_setting(
++     name = "windows",
++-    constraint_values = ["@bazel_tools//platforms:windows"],
+++    constraint_values = ["@platforms//os:windows"],
++ )
++
++ config_setting(
 +diff --git a/upb/upb.c b/upb/upb.c
 +index 266ea7d7..1410b2d8 100644
 +--- a/upb/upb.c
 ++++ b/upb/upb.c
 +@@ -11,17 +11,6 @@
-+ 
++
 + #include "upb/port_def.inc"
-+ 
++
 +-/* Guarantee null-termination and provide ellipsis truncation.
 +- * It may be tempting to "optimize" this by initializing these final
 +- * four bytes up-front and then being careful never to overwrite them,
@@ -67,7 +81,7 @@ index 00000000..5b9e9ca3
 +-}
 +-
 + /* upb_status *****************************************************************/
-+ 
++
 + void upb_status_clear(upb_status *status) {
 +@@ -37,8 +26,8 @@ const char *upb_status_errmsg(const upb_status *status) { return status->msg; }
 + void upb_status_seterrmsg(upb_status *status, const char *msg) {
@@ -78,7 +92,7 @@ index 00000000..5b9e9ca3
 ++  strncpy(status->msg, msg, UPB_STATUS_MAX_MESSAGE - 1);
 ++  status->msg[UPB_STATUS_MAX_MESSAGE - 1] = '\0';
 + }
-+ 
++
 + void upb_status_seterrf(upb_status *status, const char *fmt, ...) {
 +@@ -52,7 +41,7 @@ void upb_status_vseterrf(upb_status *status, const char *fmt, va_list args) {
 +   if (!status) return;
@@ -87,11 +101,12 @@ index 00000000..5b9e9ca3
 +-  nullz(status);
 ++  status->msg[UPB_STATUS_MAX_MESSAGE - 1] = '\0';
 + }
-+ 
++
 + /* upb_alloc ******************************************************************/
-+-- 
++--
 +2.40.1
 +
--- 
+--
 2.40.1
+
 
