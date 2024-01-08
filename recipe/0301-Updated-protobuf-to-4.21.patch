@@ -1,19 +1,19 @@
-From 021ab7f7885825f05a7aedcc0c9f20812bcefdc6 Mon Sep 17 00:00:00 2001
-From: Nishidha Panpaliya <npanpa23in.ibm.com>
-Date: Wed, 29 Mar 2023 08:41:52 +0000
-Subject: [PATCH] Updated protobuf to 3.21.12
+From a5f9cfecf8a0548ed09886602cccf9a049b007ca Mon Sep 17 00:00:00 2001
+From: Archana Shinde1 <archana.shinde2504@gmail.com>
+Date: Wed, 20 Dec 2023 15:56:30 +0000
+Subject: [PATCH] Updated protobuf to 4.21
 
 ---
  WORKSPACE | 9 +++++++++
  1 file changed, 9 insertions(+)
 
 diff --git a/WORKSPACE b/WORKSPACE
-index ca83cb17..86081098 100644
+index c60b5d8f..395f3ed3 100644
 --- a/WORKSPACE
 +++ b/WORKSPACE
-@@ -112,6 +112,15 @@ load("@lint_dependencies//:requirements.bzl", "pip_install")
- 
- pip_install()
+@@ -91,6 +91,15 @@ switched_rules_by_language(
+     grpc = True,
+ )
  
 +http_archive(
 +    name = "com_google_protobuf",
@@ -26,7 +26,7 @@ index ca83cb17..86081098 100644
 +
  http_archive(
      name = "org_tensorflow",
-     sha256 = "c030cb1905bff1d2446615992aad8d8d85cbe90c4fb625cee458c63bf466bc8e",
+     sha256 = "ce357fd0728f0d1b0831d1653f475591662ec5bca736a94ff789e6b1944df19f",
 -- 
-2.34.1
+2.40.1
 

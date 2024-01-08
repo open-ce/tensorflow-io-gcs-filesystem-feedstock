@@ -18,6 +18,8 @@ set -vex
 
 source open-ce-common-utils.sh
 
+export TF_PYTHON_VERSION=$PY_VER
+
 # Build Tensorflow from source
 SCRIPT_DIR=$RECIPE_DIR/../buildscripts
 
