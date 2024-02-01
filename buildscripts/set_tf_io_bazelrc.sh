@@ -60,6 +60,7 @@ ${CPU_TUNE_HOST_OPTION}
 build --copt="-fvisibility=hidden"
 build --copt="-D_GLIBCXX_USE_CXX11_ABI=1"
 build --copt="-DEIGEN_MAX_ALIGN_BYTES=64"
+build --copt="-Wno-maybe-uninitialized"
 build --action_env TF_HEADER_DIR="$PREFIX/lib/python${PY_VER}/site-packages/tensorflow/include"
 build --action_env TF_SHARED_LIBRARY_DIR="$PREFIX/lib/python${PY_VER}/site-packages/tensorflow"
 build --action_env TF_SHARED_LIBRARY_NAME="libtensorflow_framework.so.2"

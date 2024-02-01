@@ -19,6 +19,7 @@ source:
     - 0301-Updated-protobuf-to-4.21.patch
     - 0302-Fix-libwebp-linking-errors.patch
     - 0303-Fix-jpeg-build-in-Tensorflow.patch     #[ppc64le]
+    - 0001-failure-on-sys_siglist.patch    #[ppc_arch == 'p10']
 
 build:
   number: 3
