@@ -16,6 +16,7 @@ source:
     - 0108-Fixed-upb.patch
     - 0109-Add-include-path-for-rpc-headers-from-libtirpc-devel.patch   #[ppc_arch == 'p10']
     - 0301-Updated-protobuf-to-4.21.patch
+    - 0302-Fixed-Rename-from-bazel-toolchain-to-toolchains_llvm.patch
 
 build:
   number: 1
