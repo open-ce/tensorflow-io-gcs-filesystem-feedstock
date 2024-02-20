@@ -19,10 +19,11 @@ source:
     - 0301-Updated-protobuf-to-4.21.patch
     - 0302-Fix-libwebp-linking-errors.patch
     - 0303-Fix-jpeg-build-in-Tensorflow.patch     #[ppc64le]
+    - 0304-Renamed-bazel-toolchain-to-toolchains_llvm.patch
     - 0001-failure-on-sys_siglist.patch    #[ppc_arch == 'p10']
 
 build:
-  number: 4
+  number: 5
   string: {{ build_type }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}   #[build_type == 'cpu']
   string: {{ build_type }}{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }} #[build_type == 'cuda']
 
