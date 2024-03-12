@@ -18,9 +18,10 @@ source:
     - 0109-Add-include-path-for-rpc-headers-from-libtirpc-devel.patch   #[ppc_arch == 'p10']
     - 0301-Updated-protobuf-to-3.19.patch
     - 0302-Fix-libwebp-linking-errors.patch
+    - 0001-fix-google-cloud-cpp-URL.patch
 
 build:
-  number: 1
+  number: 2
   string: {{ build_type }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}   #[build_type == 'cpu']
   string: {{ build_type }}{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }} #[build_type == 'cuda']
 
