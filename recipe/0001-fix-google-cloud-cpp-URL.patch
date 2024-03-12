@@ -1,0 +1,42 @@
+From 60f8f122e729fe5db1209fd9240c41fd403186f5 Mon Sep 17 00:00:00 2001
+From: Deepali Chourasia <deepch23@in.ibm.com>
+Date: Tue, 12 Mar 2024 04:23:16 +0000
+Subject: [PATCH] fix google-cloud-cpp URL
+
+update
+
+update
+
+update
+---
+ WORKSPACE | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/WORKSPACE b/WORKSPACE
+index d82a1233..a4c778b8 100644
+--- a/WORKSPACE
++++ b/WORKSPACE
+@@ -54,7 +54,6 @@ http_archive(
+     sha256 = "14bf9bf97431b890e0ae5dca8f8904841d4883b8596a7108a42f5700ae58d711",
+     strip_prefix = "google-cloud-cpp-1.21.0",
+     urls = [
+-        "https://storage.googleapis.com/mirror.tensorflow.org/github.com/googleapis/google-cloud-cpp/archive/v1.21.0.tar.gz",
+         "https://github.com/googleapis/google-cloud-cpp/archive/v1.21.0.tar.gz",
+     ],
+ )
+@@ -878,10 +877,9 @@ http_archive(
+ # Needed for llvm_toolchain and Golang
+ http_archive(
+     name = "com_grail_bazel_toolchain",
+-    sha256 = "9e6065ded4b7453143e1586d6819729a63cd233114b72bf85ff3435367b02c90",
+-    strip_prefix = "bazel-toolchain-edd07e96a2ecaa131af9234d6582875d980c0ac7",
++    sha256 = "4b7999c1fa2c3117bb21651e3c155b152e44ae67b2c311214883d4707dbe183f",
++    strip_prefix = "toolchains_llvm-edd07e96a2ecaa131af9234d6582875d980c0ac7",
+     urls = [
+-        "https://storage.googleapis.com/mirror.tensorflow.org/github.com/grailbio/bazel-toolchain/archive/edd07e96a2ecaa131af9234d6582875d980c0ac7.tar.gz",
+         "https://github.com/grailbio/bazel-toolchain/archive/edd07e96a2ecaa131af9234d6582875d980c0ac7.tar.gz",
+     ],
+ )
+-- 
+2.40.1
+
