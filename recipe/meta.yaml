@@ -83,6 +83,8 @@ outputs:
 
 
 test:
+  imports:
+    - tensorflow
   commands:
     - export TF_USE_MODULAR_FILESYSTEM=1; python -c "import tensorflow_io_gcs_filesystem as tfio; import tensorflow_io;"
 
