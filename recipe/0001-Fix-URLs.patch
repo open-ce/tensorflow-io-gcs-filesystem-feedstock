@@ -1,0 +1,29 @@
+From 3a066f4285df6ce9a0869cef9d0017284ba041f9 Mon Sep 17 00:00:00 2001
+From: Deepali Chourasia <deepch23@in.ibm.com>
+Date: Wed, 27 Mar 2024 08:06:29 +0000
+Subject: [PATCH] Fix URLs
+
+---
+ WORKSPACE | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/WORKSPACE b/WORKSPACE
+index 02759f3e..51a15c54 100644
+--- a/WORKSPACE
++++ b/WORKSPACE
+@@ -866,10 +866,9 @@ http_archive(
+ # Needed for llvm_toolchain and Golang
+ http_archive(
+     name = "com_grail_bazel_toolchain",
+-    sha256 = "9e6065ded4b7453143e1586d6819729a63cd233114b72bf85ff3435367b02c90",
+-    strip_prefix = "bazel-toolchain-edd07e96a2ecaa131af9234d6582875d980c0ac7",
++    sha256 = "4b7999c1fa2c3117bb21651e3c155b152e44ae67b2c311214883d4707dbe183f",
++    strip_prefix = "toolchains_llvm-edd07e96a2ecaa131af9234d6582875d980c0ac7",
+     urls = [
+-        "https://storage.googleapis.com/mirror.tensorflow.org/github.com/grailbio/bazel-toolchain/archive/edd07e96a2ecaa131af9234d6582875d980c0ac7.tar.gz",
+         "https://github.com/grailbio/bazel-toolchain/archive/edd07e96a2ecaa131af9234d6582875d980c0ac7.tar.gz",
+     ],
+ )
+-- 
+2.40.1
+
