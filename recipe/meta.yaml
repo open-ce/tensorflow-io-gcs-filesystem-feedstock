@@ -34,7 +34,7 @@ outputs:
       host:
         - git >=2.2
         - bazel {{ bazel }}
-        - cudatoolkit {{ cudatoolkit }}
+        - cudatoolkit {{ cudatoolkit }}   #[build_type == 'cuda']
         - setuptools {{ setuptools }}
         - python {{ python }}
         - numpy {{ numpy }}
@@ -48,7 +48,7 @@ outputs:
         - python {{ python }}
         - numpy {{ numpy }}
         - tensorflow-base {{ tensorflow }}
-        - cudatoolkit {{ cudatoolkit }}
+        - cudatoolkit {{ cudatoolkit }}   #[build_type == 'cuda']
         - _tensorflow_select 1.0          #[build_type == 'cpu']
         - _tensorflow_select 2.0          #[build_type == 'cuda']
         - keras {{ keras }}
@@ -65,7 +65,7 @@ outputs:
       host:
         - git >=2.2
         - setuptools {{ setuptools }}
-        - cudatoolkit {{ cudatoolkit }}
+        - cudatoolkit {{ cudatoolkit }}   #[build_type == 'cuda']
         - python {{ python }}
         - numpy {{ numpy }}
         - tensorflow-base {{ tensorflow }}
@@ -75,6 +75,7 @@ outputs:
         - tensorflow-estimator {{ tensorflow }}
         - tensorboard {{ tensorboard }}
       run:
+        - cudatoolkit {{ cudatoolkit }}   #[build_type == 'cuda']
         - python {{ python }}
         - numpy {{ numpy }}
         - tensorflow-base {{ tensorflow }}
