@@ -20,7 +20,7 @@ source:
     - 0303-Update-rules_python-to-fix-runtime-python-repo.patch         #[ppc64le]
 
 build:
-  number: 6
+  number: 7
   string: {{ build_type }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}   #[build_type == 'cpu']
   string: {{ build_type }}{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }} #[build_type == 'cuda']
 
@@ -34,6 +34,7 @@ outputs:
       host:
         - git >=2.2
         - bazel {{ bazel }}
+        - cudatoolkit {{ cudatoolkit }}
         - setuptools {{ setuptools }}
         - python {{ python }}
         - numpy {{ numpy }}
@@ -63,6 +64,7 @@ outputs:
       host:
         - git >=2.2
         - setuptools {{ setuptools }}
+        - cudatoolkit {{ cudatoolkit }}
         - python {{ python }}
         - numpy {{ numpy }}
         - tensorflow-base {{ tensorflow }}
