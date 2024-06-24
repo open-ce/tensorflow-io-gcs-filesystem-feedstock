@@ -48,6 +48,7 @@ outputs:
         - python {{ python }}
         - numpy {{ numpy }}
         - tensorflow-base {{ tensorflow }}
+        - cudatoolkit {{ cudatoolkit }}
         - _tensorflow_select 1.0          #[build_type == 'cpu']
         - _tensorflow_select 2.0          #[build_type == 'cuda']
         - keras {{ keras }}
