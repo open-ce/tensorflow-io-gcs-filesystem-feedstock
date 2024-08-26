@@ -64,6 +64,7 @@ outputs:
         - bazel {{ bazel }}
       host:
         - git >=2.2
+        - pip {{ pip }}
         - setuptools {{ setuptools }}
         - python {{ python }}
         - numpy {{ numpy }}
