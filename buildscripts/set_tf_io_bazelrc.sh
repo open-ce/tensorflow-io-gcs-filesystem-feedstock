@@ -65,6 +65,13 @@ build --action_env TF_HEADER_DIR="$PREFIX/lib/python${PY_VER}/site-packages/tens
 build --action_env TF_SHARED_LIBRARY_DIR="$PREFIX/lib/python${PY_VER}/site-packages/tensorflow"
 build --action_env TF_SHARED_LIBRARY_NAME="libtensorflow_framework.so.2"
 build --cxxopt="-std=c++17"
+
+# libtirpc support
+build --action_env CPATH="$PREFIX/include/tirpc"
+build --action_env LIBRARY_PATH="$PREFIX/lib"
+build --linkopt="-L$PREFIX/lib"
+build --linkopt="-ltirpc"
+
 build --experimental_repo_remote_exec
 build --enable_platform_specific_config
 build:optimization --compilation_mode=opt

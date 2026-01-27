@@ -19,6 +19,9 @@ set -vex
 source open-ce-common-utils.sh
 
 export TF_PYTHON_VERSION=$PY_VER
+export CFLAGS="-I$PREFIX/include/tirpc $CFLAGS"
+export CXXFLAGS="-I$PREFIX/include/tirpc $CXXFLAGS"
+export LDFLAGS="-L$PREFIX/lib -ltirpc $LDFLAGS"
 
 # Build Tensorflow from source
 SCRIPT_DIR=$RECIPE_DIR/../buildscripts
