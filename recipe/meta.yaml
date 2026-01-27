@@ -33,7 +33,7 @@ outputs:
         - {{ compiler('cxx') }}    # [ ppc_arch != "p10"]
         - libtirpc   #[x86_64]
       host:
-        - git >=2.2
+        - git >=2.2 # [not x86_64]
         - bazel {{ bazel }}
         - cudatoolkit {{ cudatoolkit }}   #[build_type == 'cuda']
         - setuptools {{ setuptools }}
@@ -66,7 +66,7 @@ outputs:
         - bazel {{ bazel }}
         - libtirpc   #[x86_64]
       host:
-        - git >=2.2
+        - git >=2.2 # [not x86_64]
         - setuptools {{ setuptools }}
         - cudatoolkit {{ cudatoolkit }}   #[build_type == 'cuda']
         - python {{ python }}
