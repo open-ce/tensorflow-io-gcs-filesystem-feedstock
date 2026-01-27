@@ -17,11 +17,15 @@
 set -vex
 
 source open-ce-common-utils.sh
+ARCH=$(uname -p)
 
 export TF_PYTHON_VERSION=$PY_VER
-export CFLAGS="-I$PREFIX/include/tirpc $CFLAGS"
-export CXXFLAGS="-I$PREFIX/include/tirpc $CXXFLAGS"
-export LDFLAGS="-L$PREFIX/lib -ltirpc $LDFLAGS"
+
+if [[ "${ARCH}" == "x86_64" ]]; then
+  export CFLAGS="-I$PREFIX/include/tirpc ${CFLAGS}"
+  export CXXFLAGS="-I$PREFIX/include/tirpc ${CXXFLAGS}"
+  export LDFLAGS="-L$PREFIX/lib -ltirpc ${LDFLAGS}"
+fi
 
 # Build Tensorflow from source
 SCRIPT_DIR=$RECIPE_DIR/../buildscripts

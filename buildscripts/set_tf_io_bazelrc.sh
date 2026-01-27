@@ -65,13 +65,19 @@ build --action_env TF_HEADER_DIR="$PREFIX/lib/python${PY_VER}/site-packages/tens
 build --action_env TF_SHARED_LIBRARY_DIR="$PREFIX/lib/python${PY_VER}/site-packages/tensorflow"
 build --action_env TF_SHARED_LIBRARY_NAME="libtensorflow_framework.so.2"
 build --cxxopt="-std=c++17"
+EOF
 
-# libtirpc support
+# libtirpc support (x86_64 only)
+if [[ "${ARCH}" == "x86_64" ]]; then
+cat >> $BAZEL_RC_DIR/tf_io.bazelrc << EOF
 build --action_env CPATH="$PREFIX/include/tirpc"
 build --action_env LIBRARY_PATH="$PREFIX/lib"
 build --linkopt="-L$PREFIX/lib"
 build --linkopt="-ltirpc"
+EOF
+fi
 
+cat >> $BAZEL_RC_DIR/tf_io.bazelrc << EOF
 build --experimental_repo_remote_exec
 build --enable_platform_specific_config
 build:optimization --compilation_mode=opt
