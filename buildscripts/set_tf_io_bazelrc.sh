@@ -66,7 +66,7 @@ build --action_env TF_SHARED_LIBRARY_DIR="$PREFIX/lib/python${PY_VER}/site-packa
 build --action_env TF_SHARED_LIBRARY_NAME="libtensorflow_framework.so.2"
 build --cxxopt="-std=c++17"
 
-# libtirpc support (Bazel sandbox-safe)
+# libtirpc support
 build --action_env CPATH="$PREFIX/include/tirpc"
 build --action_env LIBRARY_PATH="$PREFIX/lib"
 build --linkopt="-L$PREFIX/lib"
