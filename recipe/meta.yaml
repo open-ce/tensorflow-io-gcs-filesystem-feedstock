@@ -31,14 +31,14 @@ outputs:
       build:
         - {{ compiler('c') }}      # [ ppc_arch != "p10"]
         - {{ compiler('cxx') }}    # [ ppc_arch != "p10"]
-        - libtirpc
+        - libtirpc   #[x86_64]
       host:
         - git >=2.2
         - bazel {{ bazel }}
         - cudatoolkit {{ cudatoolkit }}   #[build_type == 'cuda']
         - setuptools {{ setuptools }}
         - python {{ python }}
-        - libtirpc
+        - libtirpc     #[x86_64]
         - numpy {{ numpy }}
         - tensorflow-base {{ tensorflow }}
         - _tensorflow_select 1.0          #[build_type == 'cpu']
@@ -46,7 +46,6 @@ outputs:
         - keras {{ keras }}
         - tensorflow-estimator {{ tensorflow }}
         - tensorboard {{ tensorboard }}
-        - libtirpc
       run:
         - python {{ python }}
         - numpy {{ numpy }}
@@ -65,7 +64,7 @@ outputs:
         - {{ compiler('c') }}      # [ ppc_arch != "p10"]
         - {{ compiler('cxx') }}    # [ ppc_arch != "p10"]
         - bazel {{ bazel }}
-        - libtirpc
+        - libtirpc   #[x86_64]
       host:
         - git >=2.2
         - setuptools {{ setuptools }}
@@ -78,7 +77,7 @@ outputs:
         - keras {{ keras }}
         - tensorflow-estimator {{ tensorflow }}
         - tensorboard {{ tensorboard }}
-        - libtirpc
+        - libtirpc     #[x86_64]
       run:
         - cudatoolkit {{ cudatoolkit }}   #[build_type == 'cuda']
         - python {{ python }}
