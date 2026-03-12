@@ -46,6 +46,7 @@ outputs:
         - keras {{ keras }}
         - tensorflow-estimator {{ tensorflow }}
         - tensorboard {{ tensorboard }}
+        - libtirpc   #[x86_64]
       run:
         - python {{ python }}
         - numpy {{ numpy }}
@@ -56,6 +57,7 @@ outputs:
         - keras {{ keras }}
         - tensorflow-estimator {{ tensorflow }}
         - tensorboard {{ tensorboard }}
+        - libtirpc   #[x86_64]
 
   - name: tensorflow-io
     script: build-tf-io.sh
@@ -88,6 +90,7 @@ outputs:
         - keras {{ keras }}
         - tensorflow-estimator {{ tensorflow }}
         - tensorboard {{ tensorboard }}
+        - libtirpc   #[x86_64]
 
 
 test:
